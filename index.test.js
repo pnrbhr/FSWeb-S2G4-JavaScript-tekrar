@@ -48,18 +48,28 @@ describe('saFunction', ()=>{
         expect(functions.sa()).toBe('as');
     })
 });
+const sa = () => {
+  return "as";
+};
 //görev 1
 describe('CemberinCevresi görevi', ()=>{
     it('CemberinCevresi bir sayı döndürüyor', ()=>{
 	expect(functions.CemberinCevresi(10)).toEqual(62.8318);
     })
 });
+const CemberinCevresi = (yaricap) => {
+  return 2 * 3.14159 * yaricap;
+};
+
 //görev 2
 describe('CemberinAlani görevi', ()=>{
     it('CemberinAlani bir sayı döndürüyor', ()=>{
 	expect(functions.CemberinAlani(4,3.14159)).toEqual(50.26544);
     })
 });
+const CemberinAlani = (yaricap, pi) => {
+  return pi * yaricap * yaricap;
+};
 //görev 3
 describe('sayilar görevi', ()=>{
     it('enbuyuk bir sayı döndürüyor', ()=>{
@@ -84,3 +94,52 @@ describe('sayilar görevi', ()=>{
 	expect(functions.tekraredensayilar).toEqual(expect.arrayContaining(tekrar));
     })
 });
+const enbuyuk = Math.max(...sayilar);
+
+const enkucuk = Math.min(...sayilar);
+
+const ucetambolunenler = sayilar.filter((sayi) => {
+  return sayi % 3 === 0;
+});
+const ucebolunenlerintoplami = ucetambolunenler.reduce((toplam, sayi) => {
+  return toplam + sayi;
+}, 0);
+
+const besyuzdenkucuksayilar = sayilar.filter((sayi) => {
+  return sayi < 500;
+});
+
+const siralisayilar = [...sayilar].sort((a, b) => {
+  return a - b;
+});
+
+const sayac = {};
+
+sayilar.forEach((sayi) => {
+  sayac[sayi] = (sayac[sayi] || 0) + 1;
+});
+
+const tekraredensayilar = [];
+const eklenenler = new Set();
+
+sayilar.forEach((sayi) => {
+  if (sayac[sayi] > 1 && !eklenenler.has(sayi)) {
+    tekraredensayilar.push(
+      `${sayi} sayısı ${sayac[sayi]} kere tekrar edilmiştir`
+    );
+
+    eklenenler.add(sayi);
+  }
+});
+module.exports = {
+  sa,
+  CemberinCevresi,
+  CemberinAlani,
+  enbuyuk,
+  enkucuk,
+  ucetambolunenler,
+  ucebolunenlerintoplami,
+  besyuzdenkucuksayilar,
+  siralisayilar,
+  tekraredensayilar,
+};
